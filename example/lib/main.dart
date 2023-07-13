@@ -13,7 +13,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _paymentStatus = 'Unknown';
-  final bool _sandboxMode = false;
+  final bool _sandboxMode = true;
   final _orderIdController = TextEditingController();
   final _signatureController = TextEditingController();
 
@@ -48,12 +48,12 @@ class _MyAppState extends State<MyApp> {
                       return;
                     }
 
-                    final String _orderId = _orderIdController.text;
-                    final String _signature = _signatureController.text;
+                    final String orderId = _orderIdController.text;
+                    final String signature = _signatureController.text;
 
                     proceedPayment(
-                      _orderId,
-                      _signature,
+                      orderId,
+                      signature,
                       _sandboxMode,
                     );
                   },
@@ -150,9 +150,9 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> isVinIdAppInstalled(bool sandboxMode) async {
-    bool _status;
-    _status = await VinidpaySdk.isVinIdAppInstalled(sandboxMode);
-    print(_status);
+    bool status;
+    status = await VinidpaySdk.isVinIdAppInstalled(sandboxMode);
+    print(status);
   }
 
   void openVinIDInstallPage(bool sandboxMode) {
