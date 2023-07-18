@@ -16,7 +16,6 @@ class VinidpaySdk {
       'sign': sign ?? '',
       'sandboxMode': sandboxMode ?? false,
     });
-    print('--------------------- STATUS $status  SANBOX $sandboxMode');
     switch (status) {
       case 'payment successful!':
         return VinidpaySdkStatus.SUCCESS;

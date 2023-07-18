@@ -13,19 +13,21 @@ public class VinidpayFlutterPlugin: NSObject, FlutterPlugin {
     switch call.method {
     case "proceedPayment":
       
-        let hasInstalled = VinIDPay.sharedInstance.hasVinIDAppInstalled
-                    if (hasInstalled) {
-                        guard let args = call.arguments else {
-                            return
-                        }
-                        
-                        if let myArgs = args as? [String: Any],
-                            let id = myArgs["id"] as? String,
-                            let signature = myArgs["sign"] as? String,
-                            let sandboxMode = myArgs["sandboxMode"] as? Bool {
-                            
-                            VinIDPay.sharedInstance.sandboxMode = sandboxMode
-                            
+        guard let args = call.arguments else {
+            return
+        }
+        
+        if let myArgs = args as? [String: Any],
+            let id = myArgs["id"] as? String,
+            let signature = myArgs["sign"] as? String,
+           
+            let sandboxMode = myArgs["sandboxMode"] as? Bool {
+            
+           
+            VinIDPay.sharedInstance.sandboxMode = sandboxMode
+            
+            let hasInstalled = VinIDPay.sharedInstance.hasVinIDAppInstalled
+                        if (hasInstalled) {
                             VinIDPay.sharedInstance.pay(withOrderId: id, signature: signature, extraData: nil) { (extraData, status) in
                                 var message = ""
                                 
@@ -39,16 +41,19 @@ public class VinidpayFlutterPlugin: NSObject, FlutterPlugin {
                                 default:
                                     message = "unknow status"
                                 }
+                                
                                 result(message)
                             }
-                            
-                        } else {
-                            result("unknow status")
+                        }else {
+                            VinIDPay.sharedInstance.navigateToAppStore()
+                            result("App not installed")
                         }
-                    }else {
-                        VinIDPay.sharedInstance.navigateToAppStore()
-                        result("App not installed")
-                    }
+            
+            
+        } else {
+            result("unknow status")
+        }
+        
     case "isVinIdAppInstalled":
         guard let args = call.arguments else {
                         return
