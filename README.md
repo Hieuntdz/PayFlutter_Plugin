@@ -169,3 +169,7 @@ openVinIDInstallPage(bool sandboxMode) {
     
 ````
 
+Note : Need set url schemes in xcode to get callBack
+![alt text](https://i.imgur.com/snNSM70.png)
+
+
