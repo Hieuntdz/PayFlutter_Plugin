@@ -89,6 +89,52 @@ func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
 | `signature`              | Your Signature| String               
 | `sandboxMode`              | Sandbox Mode| bool|   
 
+- ProcessPayment:
+- Check result to get Transaction status:
+  - VinidpaySdkStatus.SUCCESS : Transaction Success
+  - VinidpaySdkStatus.FAIL    : Transaction Fail
+  - VinidpaySdkStatus.ABORT   : Transaction ABORT such as user back to cancel transaction
+  - VinidpaySdkStatus.UNKNOW  : Transaction unknow status
+
+```dart
+Future<void> proceedPayment(
+    String orderId,
+    String signature,
+    bool sandboxMode,
+    ) async {
+  VinidpaySdkStatus _status;
+  // Platform messages may fail, so we use a try/catch PlatformException.
+  try {
+    _status = await VinidpaySdk.proceedPayment(
+      orderId,
+      signature,
+      sandboxMode,
+    );
+  } on PlatformException {
+    _status = VinidpaySdkStatus.UNKNOW;
+  }
+
+  // If the widget was removed from the tree while the asynchronous platform
+  // message was in flight, we want to discard the reply rather than calling
+  // setState to update our non-existent appearance.
+  if (!mounted) return;
+
+  //Doing something
+  switch (_status) {
+    case VinidpaySdkStatus.SUCCESS:
+
+    case VinidpaySdkStatus.ABORT:
+
+    case VinidpaySdkStatus.FAIL:
+
+    case VinidpaySdkStatus.UNKNOW:
+
+    default:
+
+  }
+
+}
+```
 
 ## Utilities
 
