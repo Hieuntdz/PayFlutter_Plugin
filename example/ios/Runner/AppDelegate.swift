@@ -1,6 +1,6 @@
 import UIKit
 import Flutter
-import VinIDPaySDK
+import VinidPayApp2App
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {

@@ -1,6 +1,6 @@
 import Flutter
 import UIKit
-import VinIDPaySDK
+import VinidPayApp2App
 
 public class VinidpayFlutterPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
